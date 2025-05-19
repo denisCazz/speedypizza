@@ -1,0 +1,41 @@
+---
+import '../styles/global.css'; // Corrected path
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+	title?: string;
+}
+
+const { title = 'Speedy Pizza' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content="Speedy Pizza - La migliore pizza a Carmagnola, direttamente a casa tua o da gustare da noi in Via Valobra.">
+    <meta name="keywords" content="pizza, pizzeria, Carmagnola, Via Valobra, Speedy Pizza, domicilio, asporto">
+    <title>{title} | Speedy Pizza</title>
+  </head>
+  <body>
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+<style is:global>
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0; /* Reset default margin */
+  }
+  main {
+    flex-grow: 1; /* Allows main content to fill available space */
+  }
+</style>

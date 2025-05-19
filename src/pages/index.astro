@@ -1,0 +1,93 @@
+---
+import Layout from '../layout/layout.astro';
+---
+
+<Layout title="Home">
+  <section class="hero section-padding">
+    <div class="container text-center">
+      <h1 class="hero-title">Benvenuti da Speedy Pizza!</h1>
+      <p class="hero-subtitle">La pizza più veloce e gustosa di Carmagnola, solo da asporto. Ordina e ritira in Via Valobra.</p>
+      <a href="/menu" class="btn btn-primary">Scopri il Menu</a>
+      <a href="tel:+39011XXXXXXX" class="btn btn-secondary">Chiama per Ordinare</a> {/* Replace XXXXXXX with actual phone number */}
+    </div>
+  </section>
+
+  <section class="about section-padding" id="about">
+    <div class="container">
+      <h2 class="text-center">Chi Siamo</h2>
+      <div class="about-content">
+        <img src="/pizza.jpg" alt="Esterno della Pizzeria Speedy Pizza" class="about-image"/> {/* Placeholder image, consider one showing a take-away focus */}
+        <div>
+          <p>Speedy Pizza nasce dalla passione per la vera pizza italiana, preparata con ingredienti freschi e di alta qualità. Situati nel cuore di Carmagnola, in Via Valobra, ci impegniamo ogni giorno per offrirvi un'esperienza culinaria indimenticabile, comodamente da portare via.</p>
+          <p>Dalle classiche Margherite e Marinare alle nostre specialità della casa, ogni pizza è cotta alla perfezione. Offriamo un servizio rapido di asporto per gustare le nostre delizie dove preferite.</p>
+          <p>Ordina la tua pizza preferita: la bontà di Speedy Pizza ti aspetta!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact section-padding" id="contact">
+    <div class="container text-center">
+      <h2>Contattaci e Ordina</h2>
+      <p>Siamo in Via Valobra, Carmagnola (TO) - Solo Asporto.</p>
+      <p>Per ordinazioni: <a href="tel:+39011XXXXXXX">011 XXXXXXX</a></p> {/* Replace XXXXXXX */}
+      <p>Orari: Lun-Dom 18:00 - 22:30</p>
+      <!-- You can add a map embed here if desired -->
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    background-color: var(--light-gray); 
+  }
+
+  .hero-title {
+    font-size: 2.8rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--dark-gray);
+  }
+
+  .hero .btn {
+    margin: 0.5rem;
+  }
+
+  .about-content {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .about-image {
+    width: 100%;
+    max-width: 450px; /* Limit image size */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin: 0 auto 1rem auto; /* Center image on smaller screens before grid kicks in */
+  }
+
+  @media (min-width: 768px) {
+    .hero-title {
+      font-size: 3.5rem;
+    }
+    .hero-subtitle {
+      font-size: 1.4rem;
+    }
+    .about-content {
+      grid-template-columns: 1fr 2fr; /* Image on one side, text on other */
+    }
+    .about-image {
+      margin: 0; /* Reset margin when in grid */
+    }
+  }
+
+  .contact p {
+    font-size: 1.1rem;
+  }
+</style>
