@@ -1,14 +1,16 @@
 ---
 import Layout from '../layout/layout.astro';
+const phoneNumber = "011-9712328";
+const address = "Via Valobra 117/119, Carmagnola";
 ---
 
-<Layout title="Home">
+<Layout title="Home - Speedy Pizza">
   <section class="hero section-padding">
     <div class="container text-center">
       <h1 class="hero-title">Benvenuti da Speedy Pizza!</h1>
-      <p class="hero-subtitle">La pizza più veloce e gustosa di Carmagnola, solo da asporto. Ordina e ritira in Via Valobra.</p>
+      <p class="hero-subtitle">La pizza più veloce e gustosa di Carmagnola, solo da asporto. Ordina e ritira in {address}.</p>
       <a href="/menu" class="btn btn-primary">Scopri il Menu</a>
-      <a href="tel:+39011XXXXXXX" class="btn btn-secondary">Chiama per Ordinare</a> {/* Replace XXXXXXX with actual phone number */}
+      <a href={`tel:${phoneNumber.replace(/-/g, '')}`} class="btn btn-secondary">Chiama per Ordinare</a>
     </div>
   </section>
 
@@ -16,9 +18,9 @@ import Layout from '../layout/layout.astro';
     <div class="container">
       <h2 class="text-center">Chi Siamo</h2>
       <div class="about-content">
-        <img src="/pizza.jpg" alt="Esterno della Pizzeria Speedy Pizza" class="about-image"/> {/* Placeholder image, consider one showing a take-away focus */}
+        <img src="/pizza.jpg" alt="Pizza appena sfornata da Speedy Pizza" class="about-image"/>
         <div>
-          <p>Speedy Pizza nasce dalla passione per la vera pizza italiana, preparata con ingredienti freschi e di alta qualità. Situati nel cuore di Carmagnola, in Via Valobra, ci impegniamo ogni giorno per offrirvi un'esperienza culinaria indimenticabile, comodamente da portare via.</p>
+          <p>Speedy Pizza nasce dalla passione per la vera pizza italiana, preparata con ingredienti freschi e di alta qualità. Situati nel cuore di Carmagnola, in {address}, ci impegniamo ogni giorno per offrirvi un'esperienza culinaria indimenticabile, comodamente da portare via.</p>
           <p>Dalle classiche Margherite e Marinare alle nostre specialità della casa, ogni pizza è cotta alla perfezione. Offriamo un servizio rapido di asporto per gustare le nostre delizie dove preferite.</p>
           <p>Ordina la tua pizza preferita: la bontà di Speedy Pizza ti aspetta!</p>
         </div>
@@ -29,10 +31,10 @@ import Layout from '../layout/layout.astro';
   <section class="contact section-padding" id="contact">
     <div class="container text-center">
       <h2>Contattaci e Ordina</h2>
-      <p>Siamo in Via Valobra, Carmagnola (TO) - Solo Asporto.</p>
-      <p>Per ordinazioni: <a href="tel:+39011XXXXXXX">011 XXXXXXX</a></p> {/* Replace XXXXXXX */}
+      <p>Siamo in {address} (TO) - Solo Asporto.</p>
+      <p>Per ordinazioni: <a href={`tel:${phoneNumber.replace(/-/g, '')}`}>{phoneNumber}</a></p>
       <p>Orari: Lun-Dom 18:00 - 22:30</p>
-      <!-- You can add a map embed here if desired -->
+      <!-- Puoi aggiungere qui una mappa incorporata, se lo desideri -->
     </div>
   </section>
 </Layout>

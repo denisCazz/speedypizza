@@ -1,23 +1,38 @@
 ---
 import Layout from '../layout/layout.astro';
+// Modifica l'importazione: 'menuData' ora si riferisce direttamente all'oggetto JSON.
+import * as menuData from '../../menu.json'; 
 
-const pizzas = [
-  { name: "Margherita", ingredients: "Pomodoro, Mozzarella, Basilico", price: "€ 5.00", isVegetarian: true, isSpicy: false },
-  { name: "Diavola", ingredients: "Pomodoro, Mozzarella, Salame Piccante", price: "€ 6.50", isVegetarian: false, isSpicy: true },
-  { name: "Capricciosa", ingredients: "Pomodoro, Mozzarella, Prosciutto Cotto, Funghi, Carciofini, Olive", price: "€ 7.50", isVegetarian: false, isSpicy: false },
-  { name: "Quattro Formaggi", ingredients: "Mozzarella, Gorgonzola, Fontina, Parmigiano", price: "€ 7.00", isVegetarian: true, isSpicy: false },
-  { name: "Vegetariana", ingredients: "Pomodoro, Mozzarella, Verdure Grigliate di Stagione", price: "€ 7.00", isVegetarian: true, isSpicy: false },
-  { name: "Speedy Special", ingredients: "Pomodoro, Mozzarella di Bufala, Pomodorini Freschi, Rucola, Grana", price: "€ 8.50", isVegetarian: true, isSpicy: false },
-  { name: "Arrabbiata", ingredients: "Pomodoro, Mozzarella, Aglio, Peperoncino, Prezzemolo", price: "€ 6.00", isVegetarian: true, isSpicy: true },
+const nonVegetarianIngredients = [
+  "prosciutto", "acciughe", "wurstel", "salamino piccante", "tonno", 
+  "salsiccia", "prosciutto crudo", "frutti di mare", "speck", "bresaola", 
+  "pancetta", "gamberetti", "'nduja", "porchetta"
 ];
+
+const spicyIngredients = ["salamino piccante", "peperoncino", "'nduja"];
+
+const pizzas = menuData.pizze.map(pizza => {
+  const lowerCaseIngredients = pizza.ingredienti.map(ing => ing.toLowerCase());
+  return {
+    name: pizza.nome,
+    ingredients: pizza.ingredienti.join(', '),
+    price: `€ ${pizza.prezzo.toFixed(2)}`,
+    isVegetarian: !lowerCaseIngredients.some(ing => nonVegetarianIngredients.includes(ing)),
+    isSpicy: lowerCaseIngredients.some(ing => spicyIngredients.includes(ing))
+  };
+});
+
+const extraInfo = menuData.extra;
 ---
 
-<Layout title="Il Nostro Menu d'Asporto">
+<Layout title="Il Nostro Menu d'Asporto - Speedy Pizza">
   <section class="menu-page section-padding">
     <div class="container">
       <h1 class="text-center">Il Nostro Menu d'Asporto</h1>
       <p class="text-center menu-intro">
         Scopri la nostra selezione di pizze, preparate con ingredienti freschi e amore, pronte da portare via.
+        <br />
+        Siamo a {menuData.indirizzo}. Per ordini: <a href={`tel:${menuData.telefono.replace(/-/g, '')}`}>{menuData.telefono}</a>
         <br />
         <span class="icon-legend">🌿 Vegetariana</span> | <span class="icon-legend">🌶️ Piccante</span>
       </p>
@@ -37,7 +52,11 @@ const pizzas = [
       </div>
 
       <div class="menu-info text-center">
-        <p>Tutte le nostre pizze sono disponibili anche con impasto integrale (+ €1.00).</p>
+        <p>Aggiunta ingredienti: € {extraInfo.aggiunta_ingredienti.toFixed(2)}</p>
+        <p>Aggiunta Burrata: € {extraInfo.aggiunta_burrata.toFixed(2)}</p>
+        <p>Aggiunta Mozzarella di Bufala: € {extraInfo.aggiunta_bufala.toFixed(2)}</p>
+        <p>Sconto Pizza Baby: -€ {extraInfo.pizza_baby_sconto.toFixed(2)}</p>
+        <p>Tutte le nostre pizze sono disponibili anche con impasto integrale (supplemento da verificare al momento dell'ordine).</p>
         <p>Per allergeni o richieste particolari, non esitare a chiedere al nostro staff al momento dell'ordine!</p>
       </div>
     </div>
