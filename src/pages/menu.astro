@@ -23,6 +23,12 @@ const pizzas = menuData.pizze.map(pizza => {
 });
 
 const extraInfo = menuData.extra;
+
+// Prepara i dati per lo script client-side
+const clientSidePizzas = pizzas.map(p => ({
+  name: p.name,
+  ingredients: p.ingredients
+}));
 ---
 
 <Layout title="Il Nostro Menu d'Asporto - Speedy Pizza">
@@ -36,6 +42,10 @@ const extraInfo = menuData.extra;
         <br />
         <span class="icon-legend">🌿 Vegetariana</span> | <span class="icon-legend">🌶️ Piccante</span>
       </p>
+
+      <div class="search-container">
+        <input type="text" id="search-bar" placeholder="Cerca per nome o ingrediente..." aria-label="Cerca pizze">
+      </div>
       
       <div class="menu-grid">
         {pizzas.map(pizza => (
@@ -62,6 +72,35 @@ const extraInfo = menuData.extra;
     </div>
   </section>
 </Layout>
+
+<script define:vars={{ clientSidePizzas }}>
+  const searchBar = document.getElementById('search-bar');
+  const menuItemsNodeList = document.querySelectorAll('.menu-item');
+  // Converti NodeList in Array per usare metodi come forEach in browser più vecchi (sebbene querySelectorAll.forEach sia ampiamente supportato)
+  const menuItems = Array.from(menuItemsNodeList);
+
+  searchBar.addEventListener('input', (event) => {
+    const searchTerm = event.target.value.toLowerCase().trim();
+
+    menuItems.forEach((itemElement, index) => {
+      const pizzaData = clientSidePizzas[index];
+      
+      if (!pizzaData) { // Salvaguardia nel caso gli array non siano allineati
+        itemElement.style.display = 'none'; // Nascondi se non ci sono dati corrispondenti
+        return;
+      }
+
+      const nameMatches = pizzaData.name.toLowerCase().includes(searchTerm);
+      const ingredientsMatch = pizzaData.ingredients.toLowerCase().includes(searchTerm);
+
+      if (nameMatches || ingredientsMatch) {
+        itemElement.style.display = ''; // Mostra (ripristina display predefinito)
+      } else {
+        itemElement.style.display = 'none'; // Nascondi
+      }
+    });
+  });
+</script>
 
 <style>
   .menu-intro {
@@ -133,6 +172,31 @@ const extraInfo = menuData.extra;
   .menu-info p {
     margin-bottom: 0.5rem;
     font-size: 0.95rem;
+  }
+
+  .search-container {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  #search-bar {
+    width: 100%;
+    max-width: 500px; /* Limita la larghezza su schermi grandi */
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Angoli arrotondati */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Ombra leggera */
+  }
+
+  #search-bar:focus {
+    outline: none; /* Rimuovi outline predefinito */
+    border-color: var(--primary-color); /* Colore del bordo al focus */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Ombra al focus, usa un colore primario se definito o un fallback */
+    /* Se var(--primary-color-rgb) è definito, potresti usarlo:
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.25); 
+    */
   }
 
   /* Tablet and larger */
