@@ -7,22 +7,27 @@ const address = "Via Valobra 117/119, Carmagnola";
 <Layout title="Home - Speedy Pizza">
   <section class="hero section-padding">
     <div class="container text-center">
-      <h1 class="hero-title">Benvenuti da Speedy Pizza!</h1>
-      <p class="hero-subtitle">La pizza più veloce e gustosa di Carmagnola, solo da asporto. Ordina e ritira in {address}.</p>
-      <a href="/menu" class="btn btn-primary">Scopri il Menu</a>
-      <a href={`tel:${phoneNumber.replace(/-/g, '')}`} class="btn btn-secondary">Chiama per Ordinare</a>
+      <h1 class="hero-title fade-in-up">Benvenuti da Speedy Pizza!</h1>
+      <p class="hero-subtitle fade-in-up">La pizza più veloce e gustosa di Carmagnola, solo da asporto. Ordina e ritira in {address}.</p>
+      <div class="hero-buttons fade-in-up">
+        <a href="/menu" class="btn btn-primary">Scopri il Menu</a>
+        <a href={`tel:${phoneNumber.replace(/-/g, '')}`} class="btn btn-secondary">Chiama per Ordinare</a>
+      </div>
     </div>
   </section>
 
   <section class="about section-padding" id="about">
     <div class="container">
-      <h2 class="text-center">Chi Siamo</h2>
-      <div class="about-content">
-        <img src="/logo.jpeg" alt="Pizza appena sfornata da Speedy Pizza" class="about-image"/>
-        <div>
-          <p>Speedy Pizza nasce dalla passione per la vera pizza italiana, preparata con ingredienti freschi e di alta qualità. Situati nel cuore di Carmagnola, in {address}, ci impegniamo ogni giorno per offrirvi un'esperienza culinaria indimenticabile, comodamente da portare via.</p>
+      <h2 class="text-center section-title">Chi Siamo</h2>
+      <div class="about-content grid grid-2">
+        <div class="about-image-wrapper">
+          <img src="/logo.jpeg" alt="Pizza appena sfornata da Speedy Pizza" class="about-image"/>
+        </div>
+        <div class="about-text">
+          <p class="lead">Speedy Pizza nasce dalla passione per la vera pizza italiana, preparata con ingredienti freschi e di alta qualità.</p>
+          <p>Situati nel cuore di Carmagnola, in {address}, ci impegniamo ogni giorno per offrirvi un'esperienza culinaria indimenticabile, comodamente da portare via.</p>
           <p>Dalle classiche Margherite e Marinare alle nostre specialità della casa, ogni pizza è cotta alla perfezione. Offriamo un servizio rapido di asporto per gustare le nostre delizie dove preferite.</p>
-          <p>Ordina la tua pizza preferita: la bontà di Speedy Pizza ti aspetta!</p>
+          <p><strong>Ordina la tua pizza preferita: la bontà di Speedy Pizza ti aspetta!</strong></p>
         </div>
       </div>
     </div>
@@ -30,66 +35,207 @@ const address = "Via Valobra 117/119, Carmagnola";
 
   <section class="contact section-padding" id="contact">
     <div class="container text-center">
-      <h2>Contattaci e Ordina</h2>
-      <p>Siamo in {address} (TO) - Solo Asporto.</p>
-      <p>Per ordinazioni: <a href={`tel:${phoneNumber.replace(/-/g, '')}`}>{phoneNumber}</a></p>
-      <p>Orari: Lun-Dom 18:00 - 22:30</p>
-      <!-- Puoi aggiungere qui una mappa incorporata, se lo desideri -->
+      <h2 class="section-title">Contattaci e Ordina</h2>
+      <div class="contact-info">
+        <div class="contact-card card">
+          <div class="card-content">
+            <h3>📍 Dove Siamo</h3>
+            <p>{address} (TO)</p>
+            <p class="contact-note">Solo Asporto</p>
+          </div>
+        </div>
+        <div class="contact-card card">
+          <div class="card-content">
+            <h3>📞 Ordinazioni</h3>
+            <p><a href={`tel:${phoneNumber.replace(/-/g, '')}`} class="phone-link">{phoneNumber}</a></p>
+            <a href={`tel:${phoneNumber.replace(/-/g, '')}`} class="btn btn-primary mt-2">Chiama Ora</a>
+          </div>
+        </div>
+        <div class="contact-card card">
+          <div class="card-content">
+            <h3>🕐 Orari</h3>
+            <p>Lunedì - Domenica</p>
+            <p class="hours">18:00 - 22:30</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </Layout>
 
 <style>
   .hero {
-    background-color: var(--light-gray); 
+    background: linear-gradient(135deg, var(--light-gray) 0%, #f1f2f6 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/pizza-pattern.svg') repeat;
+    opacity: 0.03;
+    z-index: 1;
+  }
+
+  .hero .container {
+    position: relative;
+    z-index: 2;
   }
 
   .hero-title {
-    font-size: 2.8rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 
   .hero-subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    color: var(--dark-gray);
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+    color: var(--text-light);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
   }
 
-  .hero .btn {
-    margin: 0.5rem;
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
-  .about-content {
-    display: grid;
-    gap: 2rem;
+  .about {
+    background: var(--bg-white);
+  }
+
+  .section-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 3rem;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+    border-radius: 2px;
+  }
+
+  .about-image-wrapper {
+    display: flex;
+    justify-content: center;
     align-items: center;
   }
 
   .about-image {
     width: 100%;
-    max-width: 450px; /* Limit image size */
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    margin: 0 auto 1rem auto; /* Center image on smaller screens before grid kicks in */
+    max-width: 400px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-medium);
+    transition: transform var(--transition-medium);
+  }
+
+  .about-image:hover {
+    transform: scale(1.02);
+  }
+
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .lead {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact {
+    background: linear-gradient(135deg, var(--bg-section) 0%, var(--light-gray) 100%);
+  }
+
+  .contact-info {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
+    grid-template-columns: 1fr;
   }
 
   @media (min-width: 768px) {
-    .hero-title {
-      font-size: 3.5rem;
-    }
-    .hero-subtitle {
-      font-size: 1.4rem;
-    }
-    .about-content {
-      grid-template-columns: 1fr 2fr; /* Image on one side, text on other */
-    }
-    .about-image {
-      margin: 0; /* Reset margin when in grid */
+    .contact-info {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  .contact p {
+  .contact-card {
+    transition: all var(--transition-medium);
+  }
+
+  .contact-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-heavy);
+  }
+
+  .contact-card h3 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .phone-link {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    text-decoration: none;
+  }
+
+  .phone-link:hover {
+    color: var(--primary-color);
+  }
+
+  .contact-note {
+    font-style: italic;
+    color: var(--medium-gray);
+    font-size: 0.9rem;
+  }
+
+  .hours {
+    font-weight: 600;
+    color: var(--secondary-color);
     font-size: 1.1rem;
+  }
+
+  @media (max-width: 768px) {
+    .hero-subtitle {
+      font-size: 1.1rem;
+    }
+    
+    .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-buttons .btn {
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .about-content {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
   }
 </style>
