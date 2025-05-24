@@ -5,6 +5,7 @@ const currentYear = new Date().getFullYear();
 <footer>
   <p>Speedy Pizza | Via Valobra 117/119, Carmagnola (TO) </p>
   <p>&copy; {currentYear} Speedy Pizza. Tutti i diritti riservati.</p>
+  <p>Sito realizzato da <a href="https://bitora.it" target="_blank" rel="noopener noreferrer">bitora.it</a></p>
 </footer>
 
 <style>
@@ -48,6 +49,24 @@ const currentYear = new Date().getFullYear();
     border-top: 1px solid rgba(236, 240, 241, 0.1);
     padding-top: 1.5rem;
     margin-top: 1.5rem;
+  }
+
+  footer p:nth-child(3) {
+    font-size: 0.85rem;
+    color: var(--medium-gray);
+    margin-top: 0.5rem;
+  }
+
+  footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+  }
+
+  footer a:hover {
+    color: white;
+    text-decoration: underline;
   }
 
   @media (max-width: 768px) {
