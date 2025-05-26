@@ -27,7 +27,7 @@
     {
       "nome": "Siciliana",
       "ingredienti": ["pomodoro", "acciughe", "capperi", "pepe"],
-      "prezzo": 7.00
+      "prezzo": 8.00
     },
     {
       "nome": "Prosciutto",
@@ -35,9 +35,14 @@
       "prezzo": 8.00
     },
     {
+      "nome": "Funghi",
+      "ingredienti": ["pomodoro", "mozzarella", "funghi"],
+      "prezzo": 8.00
+    },
+    {
       "nome": "Prosciutto e Funghi",
       "ingredienti": ["pomodoro", "mozzarella", "prosciutto", "funghi"],
-      "prezzo": 8.50
+      "prezzo": 9.00
     },
     {
       "nome": "Viennese",
@@ -52,12 +57,12 @@
     {
       "nome": "Tonno",
       "ingredienti": ["pomodoro", "mozzarella", "tonno"],
-      "prezzo": 7.50
+      "prezzo": 8.00
     },
     {
       "nome": "Gorgonzola",
       "ingredienti": ["pomodoro", "mozzarella", "gorgonzola"],
-      "prezzo": 7.00
+      "prezzo": 8.00
     },
     {
       "nome": "4 Formaggi",
@@ -107,12 +112,12 @@
     {
       "nome": "Calzone",
       "ingredienti": ["pomodoro", "mozzarella", "prosciutto", "funghi"],
-      "prezzo": 8.50
+      "prezzo": 9.00
     },
     {
       "nome": "Disco Volante (PIZZA DOPPIA)",
       "ingredienti": ["pomodoro", "mozzarella", "prosciutto", "funghi", "salamino piccante", "wurstel", "carciofi"],
-      "prezzo": 9.50
+      "prezzo": 10.00
     },
     {
       "nome": "Bufala",
@@ -122,7 +127,7 @@
     {
       "nome": "Frutti di Mare",
       "ingredienti": ["pomodoro", "frutti di mare"],
-      "prezzo": 8.00
+      "prezzo": 9.00
     },
     {
       "nome": "Speck",
@@ -147,7 +152,7 @@
     {
       "nome": "Caprese",
       "ingredienti": ["pomodoro", "mozzarella", "pomodoro fresco"],
-      "prezzo": 7.00
+      "prezzo": 8.00
     },
     {
       "nome": "Estiva",
@@ -172,12 +177,12 @@
     {
       "nome": "Gorgo e Noci",
       "ingredienti": ["mozzarella", "gorgonzola", "noci"],
-      "prezzo": 8.00
+      "prezzo": 9.00
     },
     {
       "nome": "Gorgo e Pere",
       "ingredienti": ["mozzarella", "gorgonzola", "pere"],
-      "prezzo": 8.00
+      "prezzo": 9.00
     },
     {
       "nome": "Tommy",
@@ -187,7 +192,7 @@
     {
       "nome": "Carbonara",
       "ingredienti": ["pomodoro", "mozzarella", "pancetta", "uovo", "parmigiano", "pepe"],
-      "prezzo": 9.00
+      "prezzo": 10.00
     },
     {
       "nome": "Carmagnolese",
@@ -216,7 +221,7 @@
     },
     {
       "nome": "Boscaiola",
-      "ingredienti": ["mozzarella", "prosciutto", "funghi", "panna"],
+      "ingredienti": ["pomodoro", "mozzarella", "prosciutto", "funghi", "panna"],
       "prezzo": 9.00
     },
     {
@@ -231,7 +236,7 @@
     },
     {
       "nome": "Speedy",
-      "ingredienti": ["pomodoro", "mozzarella", "'nduja", "pomodorini freschi", "parmigiano"],
+      "ingredienti": ["pomodoro", "mozzarella", "salsiccia", "'nduja", "pomodorini freschi", "parmigiano"],
       "prezzo": 9.00
     },
     {
@@ -245,15 +250,17 @@
       "prezzo": 9.00
     },
     {
-      "nome": "Golosa",
+      "nome": "Golosona",
       "ingredienti": ["nutella", "zucchero a velo"],
       "prezzo": 6.00
     }
   ],
   "extra": {
     "aggiunta_ingredienti": 1.00,
+    "aggiunta_patatine": 1.50,
+    "aggiunta_salumi_pregiati": 2.00,
     "aggiunta_burrata": 3.00,
-    "aggiunta_bufala": 2.00,
+    "aggiunta_bufala": 2.50,
     "pizza_baby_sconto": 0.50
   }
 }

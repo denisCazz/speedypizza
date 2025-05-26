@@ -8,7 +8,7 @@ const address = "Via Valobra 117/119, Carmagnola";
   <section class="hero section-padding">
     <div class="container text-center">
       <h1 class="hero-title fade-in-up">Benvenuti da Speedy Pizza!</h1>
-      <p class="hero-subtitle fade-in-up">La pizza più veloce e gustosa di Carmagnola, solo da asporto. Ordina e ritira in {address}.</p>
+      <p class="hero-subtitle fade-in-up">La pizza più veloce e gustosa di Carmagnola. <strong>Consegna a domicilio GRATUITA</strong> e asporto disponibili da {address}.</p>
       <div class="hero-buttons fade-in-up">
         <a href="/menu" class="btn btn-primary">Scopri il Menu</a>
         <a href={`tel:${phoneNumber.replace(/-/g, '')}`} class="btn btn-secondary">Chiama per Ordinare</a>
@@ -25,9 +25,9 @@ const address = "Via Valobra 117/119, Carmagnola";
         </div>
         <div class="about-text">
           <p class="lead">Speedy Pizza nasce dalla passione per la vera pizza italiana, preparata con ingredienti freschi e di alta qualità.</p>
-          <p>Situati nel cuore di Carmagnola, in {address}, ci impegniamo ogni giorno per offrirvi un'esperienza culinaria indimenticabile, comodamente da portare via.</p>
-          <p>Dalle classiche Margherite e Marinare alle nostre specialità della casa, ogni pizza è cotta alla perfezione. Offriamo un servizio rapido di asporto per gustare le nostre delizie dove preferite.</p>
-          <p><strong>Ordina la tua pizza preferita: la bontà di Speedy Pizza ti aspetta!</strong></p>
+          <p>Situati nel cuore di Carmagnola, in {address}, ci impegniamo ogni giorno per offrirvi un'esperienza culinaria indimenticabile, con <strong>consegna a domicilio gratuita</strong> o comodamente da portare via.</p>
+          <p>Dalle classiche Margherite e Marinare alle nostre specialità della casa, ogni pizza è cotta alla perfezione. Offriamo un servizio rapido sia per l'asporto che per la consegna gratuita a domicilio.</p>
+          <p><strong>Ordina la tua pizza preferita: la bontà di Speedy Pizza ti aspetta, direttamente a casa tua senza costi aggiuntivi!</strong></p>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@ const address = "Via Valobra 117/119, Carmagnola";
           <div class="card-content">
             <h3>📍 Dove Siamo</h3>
             <p>{address} (TO)</p>
-            <p class="contact-note">Solo Asporto</p>
+            <p class="delivery-highlight">🚚 Consegna GRATUITA | Asporto</p>
           </div>
         </div>
         <div class="contact-card card">
@@ -55,7 +55,7 @@ const address = "Via Valobra 117/119, Carmagnola";
           <div class="card-content">
             <h3>🕐 Orari</h3>
             <p>Lunedì - Domenica</p>
-            <p class="hours">18:00 - 22:30</p>
+            <p class="hours">18:00 - 22:00</p>
           </div>
         </div>
       </div>
@@ -209,6 +209,17 @@ const address = "Via Valobra 117/119, Carmagnola";
     font-style: italic;
     color: var(--medium-gray);
     font-size: 0.9rem;
+  }
+
+  .delivery-highlight {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+    background: rgba(231, 76, 60, 0.1);
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--border-radius);
+    margin-top: 0.5rem;
+    display: inline-block;
   }
 
   .hours {
