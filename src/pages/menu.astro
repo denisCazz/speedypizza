@@ -359,29 +359,20 @@ const phoneNumber = menuData.telefono;
       updateCartDisplay();
     }
   }
-
   function callToOrder() {
     if (cart.length === 0) return;
 
     const orderList = cart.map(item => 
       `${item.quantity}x ${item.name}`
-    ).join('\n');
+    ).join(', ');
 
-    const message = `Ciao! Vorrei ordinare:\n\n${orderList}\n\nGrazie!`;
     const phone = phoneNumber.replace(/-/g, '');
     
-    // Prova a aprire WhatsApp, altrimenti fallback alla chiamata
-    const whatsappUrl = `https://wa.me/39${phone}?text=${encodeURIComponent(message)}`;
-    const callUrl = `tel:${phone}`;
+    // Chiama direttamente
+    window.location.href = `tel:${phone}`;
     
-    // Mostra opzioni all'utente
-    const useWhatsApp = confirm('Vuoi inviare l\'ordine via WhatsApp?\n\nOK = WhatsApp\nAnnulla = Chiamata telefonica');
-    
-    if (useWhatsApp) {
-      window.open(whatsappUrl, '_blank');
-    } else {
-      window.location.href = callUrl;
-    }
+    // Mostra la lista in un alert per riferimento
+    alert(`Le tue pizze da ordinare:\n\n${orderList}\n\nChiama ora per confermare l'ordine!`);
   }
 
   // Rendi le funzioni globali per onclick
@@ -968,10 +959,10 @@ const phoneNumber = menuData.telefono;
   .remove-btn:hover svg {
     transform: scale(1.1) rotate(10deg);
   }
-
   .cart-actions {
     border-top: 2px solid var(--light-gray);
     padding-top: 1.5rem;
+    padding-bottom: 2rem; /* Spazio extra per evitare che i pulsanti siano coperti dai tab di Safari su iPhone */
   }
 
   .cart-total {
@@ -1333,7 +1324,6 @@ const phoneNumber = menuData.telefono;
       right: -6px;
     }
   }
-
   @media (max-width: 480px) {
     .cart-content {
       padding: 1rem;
@@ -1352,7 +1342,14 @@ const phoneNumber = menuData.telefono;
       gap: 0.5rem;
     }    .cart-text {
       display: none;
-    }    .floating-cart {
+    }
+    
+    /* Spazio extra per evitare che i pulsanti siano nascosti sotto i tab di Safari su iPhone */
+    .cart-actions {
+      padding-bottom: 3rem;
+    }
+    
+    .floating-cart {
       bottom: 15px;
       right: 15px;
       width: 70px;
