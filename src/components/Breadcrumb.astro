@@ -1,0 +1,92 @@
+---
+import { SEO_CONFIG } from '../utils/seo.js';
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  className?: string;
+}
+
+const { items, className = "breadcrumb" } = Astro.props;
+
+// Aggiungi sempre la home come primo elemento
+const breadcrumbItems = [
+  { name: 'Home', url: SEO_CONFIG.SITE_URL },
+  ...items
+];
+
+// Genera structured data per i breadcrumb
+const breadcrumbStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbItems.map((item, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": item.name,
+    "item": item.url
+  }))
+};
+---
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class={className}>
+  <ol class="breadcrumb-list">
+    {breadcrumbItems.map((item, index) => (
+      <li class="breadcrumb-item">
+        {index < breadcrumbItems.length - 1 ? (
+          <a href={item.url}>{item.name}</a>
+        ) : (
+          <span aria-current="page">{item.name}</span>
+        )}
+        {index < breadcrumbItems.length - 1 && <span class="separator">/</span>}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<!-- Structured Data for Breadcrumbs -->
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbStructuredData)}></script>
+
+<style>
+  .breadcrumb {
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+  
+  .breadcrumb-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.5rem;
+  }
+  
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .breadcrumb-item a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+  
+  .breadcrumb-item a:hover {
+    text-decoration: underline;
+  }
+  
+  .breadcrumb-item span[aria-current="page"] {
+    color: #666;
+    font-weight: 500;
+  }
+  
+  .separator {
+    color: #999;
+  }
+</style>

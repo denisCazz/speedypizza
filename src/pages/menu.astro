@@ -1,7 +1,8 @@
 ---
 import Layout from '../layout/layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 // Modifica l'importazione: 'menuData' ora si riferisce direttamente all'oggetto JSON.
-import * as menuData from '../../menu.json'; 
+import * as menuData from '../../menu.json';
 
 const nonVegetarianIngredients = [
   "prosciutto", "acciughe", "wurstel", "salamino piccante", "tonno", 
@@ -34,9 +35,19 @@ const clientSidePizzas = pizzas.map(p => ({
 const phoneNumber = menuData.telefono;
 ---
 
-<Layout title="Il Nostro Menu d'Asporto - Speedy Pizza">
+<Layout 
+  title="Il Nostro Menu"
+  description="Scopri il menu completo di Speedy Pizza: pizze tradizionali e gourmet, preparate con ingredienti freschi e di qualità. Ordina per consegna a domicilio o ritiro."
+  keywords={["menu pizza", "pizze Carmagnola", "menu pizzeria", "ordine pizza online", "pizze asporto"]}
+>
   <section class="menu-page section-padding">
     <div class="container">
+      <Breadcrumb 
+        items={[
+          { name: 'Menu', url: '/menu' }
+        ]}
+      />
+      
       <h1 class="text-center">Il Nostro Menu d'Asporto</h1>
       <p class="text-center menu-intro">
         Scopri la nostra selezione di pizze, preparate con ingredienti freschi e amore, pronte da portare via.

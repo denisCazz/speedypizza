@@ -1,0 +1,85 @@
+---
+import { SEO_CONFIG } from '../utils/seo.js';
+
+// Component per Structured Data Schema.org
+interface Props {
+  type?: 'restaurant' | 'menu' | 'breadcrumb';
+  pageData?: any;
+}
+
+const { type = 'restaurant', pageData } = Astro.props;
+
+const baseRestaurantData = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": SEO_CONFIG.BUSINESS.name,
+  "image": {
+    "@type": "ImageObject",
+    "url": `${SEO_CONFIG.SITE_URL}${SEO_CONFIG.LOGO_IMAGE}`,
+    "width": 512,
+    "height": 512
+  },
+  "description": SEO_CONFIG.SITE_DESCRIPTION,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": SEO_CONFIG.BUSINESS.address.street,
+    "addressLocality": SEO_CONFIG.BUSINESS.address.city,
+    "addressRegion": SEO_CONFIG.BUSINESS.address.region,
+    "postalCode": SEO_CONFIG.BUSINESS.address.postalCode,
+    "addressCountry": SEO_CONFIG.BUSINESS.address.country
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": SEO_CONFIG.BUSINESS.coordinates.latitude,
+    "longitude": SEO_CONFIG.BUSINESS.coordinates.longitude
+  },
+  "url": SEO_CONFIG.SITE_URL,
+  "telephone": SEO_CONFIG.BUSINESS.phone,
+  "priceRange": SEO_CONFIG.BUSINESS.priceRange,
+  "servesCuisine": SEO_CONFIG.BUSINESS.cuisine,
+  "hasMenu": `${SEO_CONFIG.SITE_URL}/menu`,
+  "acceptsReservations": SEO_CONFIG.BUSINESS.services.reservation,
+  "takeaway": SEO_CONFIG.BUSINESS.services.takeaway,
+  "delivery": SEO_CONFIG.BUSINESS.services.delivery,
+  "paymentAccepted": ["Cash", "Credit Card"],
+  "currenciesAccepted": "EUR",
+  "openingHoursSpecification": SEO_CONFIG.BUSINESS.hours.map(schedule => ({
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": schedule.days,
+    "opens": schedule.open,
+    "closes": schedule.close
+  })),
+  "areaServed": {
+    "@type": "City",
+    "name": SEO_CONFIG.BUSINESS.address.city
+  }
+};
+
+let structuredData: any = baseRestaurantData;
+
+if (type === 'menu' && pageData) {
+  // Per il menu, estendo i dati del ristorante
+  structuredData = {
+    ...baseRestaurantData,
+    "@type": "Restaurant",
+    "hasMenuSection": pageData.menuSections || []
+  };
+}
+
+if (type === 'breadcrumb' && pageData && pageData.breadcrumbs) {
+  const breadcrumbData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": pageData.breadcrumbs.map((item: any, index: number) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": item.url
+    }))
+  };
+  
+  structuredData = [baseRestaurantData, breadcrumbData];
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>

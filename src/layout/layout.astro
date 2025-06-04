@@ -1,24 +1,29 @@
 ---
-import '../styles/global.css'; // Corrected path
+import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import SEOHead from '../components/SEOHead.astro';
+import StructuredData from '../components/StructuredData.astro';
 
 interface Props {
 	title?: string;
 	description?: string;
 	image?: string;
 	canonical?: string;
+	type?: string;
+	noindex?: boolean;
+	keywords?: string[];
 }
 
 const { 
-	title = 'Speedy Pizza',
-	description = 'Speedy Pizza - La migliore pizza a Carmagnola, direttamente a casa tua o da gustare da noi in Via Valobra. Ordina online per consegna a domicilio o ritiro.',
-	image = '/logo.jpeg',
-	canonical = Astro.url.href
+	title,
+	description,
+	image,
+	canonical,
+	type,
+	noindex,
+	keywords
 } = Astro.props;
-
-const fullTitle = title === 'Speedy Pizza' ? title : `${title} | Speedy Pizza`;
-const siteUrl = 'https://speedypizza.it'; // Replace with your actual domain
 ---
 
 <!DOCTYPE html>
@@ -31,74 +36,24 @@ const siteUrl = 'https://speedypizza.it'; // Replace with your actual domain
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
+    <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    
-    <!-- Primary SEO -->
-    <title>{fullTitle}</title>
-    <meta name="description" content={description}>
-    <meta name="keywords" content="pizza, pizzeria, Carmagnola, Via Valobra, Speedy Pizza, domicilio, asporto, consegna, ordine online">
-    <link rel="canonical" href={canonical} />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, siteUrl).href} />
-    <meta property="og:site_name" content="Speedy Pizza" />
-    <meta property="og:locale" content="it_IT" />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonical} />
-    <meta property="twitter:title" content={fullTitle} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(image, siteUrl).href} />
-    
-    <!-- Additional SEO -->
-    <meta name="robots" content="index, follow" />
-    <meta name="author" content="Speedy Pizza" />
-    <meta name="geo.region" content="IT-PM" />
-    <meta name="geo.placename" content="Carmagnola" />
-    <meta name="geo.position" content="44.8514;7.7164" />
-    <meta name="ICBM" content="44.8514, 7.7164" />
+    <link rel="icon" href="/favicon.ico" />
+      <!-- SEO Meta Tags -->
+    <SEOHead 
+      title={title}
+      description={description}
+      image={image}
+      canonical={canonical}
+      type={type}
+      noindex={noindex}
+      keywords={keywords}
+    />
     
     <!-- Structured Data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Restaurant",
-        "name": "Speedy Pizza",
-        "image": {
-          "@type": "ImageObject",
-          "url": "https://speedypizza.it/logo.jpeg"
-        },
-        "description": "Pizzeria a Carmagnola con servizio di consegna a domicilio e asporto",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Via Valobra",
-          "addressLocality": "Carmagnola",
-          "addressRegion": "Piemonte",
-          "postalCode": "10022",
-          "addressCountry": "IT"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 44.8514,
-          "longitude": 7.7164
-        },
-        "url": "https://speedypizza.it",
-        "telephone": "+390119712328",
-        "priceRange": "€€",
-        "servesCuisine": "Italian",
-        "hasMenu": "https://speedypizza.it/menu",
-        "acceptsReservations": false,
-        "takeaway": true,
-        "delivery": true
-      }
-    </script>
+    <StructuredData type="restaurant" />
   </head>
   <body>
     <Navbar />
@@ -108,14 +63,15 @@ const siteUrl = 'https://speedypizza.it'; // Replace with your actual domain
     <Footer />
   </body>
 </html>
+
 <style is:global>
   body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    margin: 0; /* Reset default margin */
+    margin: 0;
   }
   main {
-    flex-grow: 1; /* Allows main content to fill available space */
+    flex-grow: 1;
   }
 </style>

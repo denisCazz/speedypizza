@@ -1,0 +1,76 @@
+---
+// Componente per Google Analytics e altri script di tracking
+interface Props {
+  gtag?: string;
+  facebookPixel?: string;
+}
+
+const { gtag, facebookPixel } = Astro.props;
+---
+
+{gtag && (
+  <>
+    <!-- Google Analytics -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${gtag}`}></script>
+    <script is:inline define:vars={{ gtag }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gtag, {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+    </script>
+  </>
+)}
+
+{facebookPixel && (
+  <>
+    <!-- Facebook Pixel -->
+    <script is:inline define:vars={{ facebookPixel }}>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', facebookPixel);
+      fbq('track', 'PageView');
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none"
+           src={`https://www.facebook.com/tr?id=${facebookPixel}&ev=PageView&noscript=1`} />
+    </noscript>
+  </>
+)}
+
+<!-- Event tracking -->
+<script is:inline>
+  // Track phone calls and menu visits
+  document.addEventListener('DOMContentLoaded', function() {
+    // Track phone calls
+    const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+    phoneLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        if (typeof window.gtag !== 'undefined') {
+          window.gtag('event', 'phone_call', {
+            event_category: 'engagement',
+            event_label: 'phone_click'
+          });
+        }
+      });
+    });
+    
+    // Track menu page visits
+    if (window.location.pathname === '/menu') {
+      if (typeof window.gtag !== 'undefined') {
+        window.gtag('event', 'view_menu', {
+          event_category: 'engagement',
+          event_label: 'menu_page_view'
+        });
+      }
+    }
+  });
+</script>

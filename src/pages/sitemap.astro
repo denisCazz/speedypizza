@@ -1,0 +1,135 @@
+---
+import Layout from '../layout/layout.astro';
+import { SEO_CONFIG } from '../utils/seo.js';
+
+const sitePages = [
+  {
+    title: 'Home',
+    url: '/',
+    description: 'Pagina principale di Speedy Pizza con informazioni generali e contatti',
+    lastmod: '2025-06-04'
+  },
+  {
+    title: 'Menu',
+    url: '/menu',
+    description: 'Il nostro menu completo con tutte le pizze disponibili per asporto e consegna',
+    lastmod: '2025-06-04'
+  },
+  {
+    title: 'Sitemap',
+    url: '/sitemap',
+    description: 'Mappa del sito con tutte le pagine disponibili',
+    lastmod: '2025-06-04'
+  }
+];
+---
+
+<Layout 
+  title="Mappa del Sito"
+  description="Mappa completa del sito Speedy Pizza con tutte le pagine e sezioni disponibili."
+  noindex={true}
+>
+  <section class="sitemap-page section-padding">
+    <div class="container">
+      <h1>Mappa del Sito</h1>
+      <p class="sitemap-intro">
+        Trova facilmente tutte le pagine e sezioni del nostro sito web.
+      </p>
+      
+      <div class="sitemap-grid">
+        {sitePages.map(page => (
+          <div class="sitemap-item">
+            <h3>
+              <a href={page.url}>{page.title}</a>
+            </h3>
+            <p>{page.description}</p>
+            <small>Ultimo aggiornamento: {page.lastmod}</small>
+          </div>
+        ))}
+      </div>
+      
+      <div class="sitemap-info">
+        <h2>Informazioni Aggiuntive</h2>
+        <ul>
+          <li><strong>Sitemap XML:</strong> <a href="/sitemap-index.xml">sitemap-index.xml</a></li>
+          <li><strong>Robots.txt:</strong> <a href="/robots.txt">robots.txt</a></li>
+          <li><strong>Sito web:</strong> <a href={SEO_CONFIG.SITE_URL}>{SEO_CONFIG.SITE_URL}</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .sitemap-page {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .sitemap-intro {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+  }
+  
+  .sitemap-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .sitemap-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: #f9f9f9;
+  }
+  
+  .sitemap-item h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.3rem;
+  }
+  
+  .sitemap-item h3 a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+  
+  .sitemap-item h3 a:hover {
+    text-decoration: underline;
+  }
+  
+  .sitemap-item p {
+    margin: 0 0 0.5rem 0;
+    color: #666;
+  }
+  
+  .sitemap-item small {
+    color: #999;
+    font-size: 0.9rem;
+  }
+  
+  .sitemap-info {
+    border-top: 2px solid #ddd;
+    padding-top: 2rem;
+  }
+  
+  .sitemap-info ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sitemap-info li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .sitemap-info a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+  
+  .sitemap-info a:hover {
+    text-decoration: underline;
+  }
+</style>
