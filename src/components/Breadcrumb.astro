@@ -11,7 +11,7 @@ interface Props {
   className?: string;
 }
 
-const { items, className = "breadcrumb" } = Astro.props;
+const { items, className = "" } = Astro.props;
 
 // Aggiungi sempre la home come primo elemento
 const breadcrumbItems = [
@@ -33,16 +33,16 @@ const breadcrumbStructuredData = {
 ---
 
 <!-- Breadcrumb Navigation -->
-<nav aria-label="Breadcrumb" class={className}>
-  <ol class="breadcrumb-list">
+<nav aria-label="Breadcrumb" class={`py-4 ${className}`}>
+  <ol class="flex flex-wrap items-center gap-2 text-sm text-slate-500">
     {breadcrumbItems.map((item, index) => (
-      <li class="breadcrumb-item">
+      <li class="flex items-center gap-2">
         {index < breadcrumbItems.length - 1 ? (
-          <a href={item.url}>{item.name}</a>
+          <a href={item.url} class="text-red-600 hover:text-red-700 hover:underline transition-colors font-medium">{item.name}</a>
         ) : (
-          <span aria-current="page">{item.name}</span>
+          <span aria-current="page" class="text-slate-800 font-semibold">{item.name}</span>
         )}
-        {index < breadcrumbItems.length - 1 && <span class="separator">/</span>}
+        {index < breadcrumbItems.length - 1 && <span class="text-slate-400">/</span>}
       </li>
     ))}
   </ol>
@@ -50,43 +50,3 @@ const breadcrumbStructuredData = {
 
 <!-- Structured Data for Breadcrumbs -->
 <script type="application/ld+json" set:html={JSON.stringify(breadcrumbStructuredData)}></script>
-
-<style>
-  .breadcrumb {
-    margin: 1rem 0;
-    font-size: 0.9rem;
-  }
-  
-  .breadcrumb-list {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 0.5rem;
-  }
-  
-  .breadcrumb-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .breadcrumb-item a {
-    color: #0066cc;
-    text-decoration: none;
-  }
-  
-  .breadcrumb-item a:hover {
-    text-decoration: underline;
-  }
-  
-  .breadcrumb-item span[aria-current="page"] {
-    color: #666;
-    font-weight: 500;
-  }
-  
-  .separator {
-    color: #999;
-  }
-</style>

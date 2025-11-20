@@ -29,107 +29,42 @@ const sitePages = [
   description="Mappa completa del sito Speedy Pizza con tutte le pagine e sezioni disponibili."
   noindex={true}
 >
-  <section class="sitemap-page section-padding">
-    <div class="container">
-      <h1>Mappa del Sito</h1>
-      <p class="sitemap-intro">
+  <section class="py-16 md:py-24 bg-slate-50 min-h-screen">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+      <h1 class="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-4">Mappa del Sito</h1>
+      <p class="text-lg text-slate-600 mb-10">
         Trova facilmente tutte le pagine e sezioni del nostro sito web.
       </p>
       
-      <div class="sitemap-grid">
+      <div class="grid gap-6 mb-12">
         {sitePages.map(page => (
-          <div class="sitemap-item">
-            <h3>
-              <a href={page.url}>{page.title}</a>
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
+            <h3 class="text-xl font-bold mb-2">
+              <a href={page.url} class="text-red-600 hover:text-red-700 hover:underline transition-colors">{page.title}</a>
             </h3>
-            <p>{page.description}</p>
-            <small>Ultimo aggiornamento: {page.lastmod}</small>
+            <p class="text-slate-600 mb-2">{page.description}</p>
+            <small class="text-slate-400 text-sm">Ultimo aggiornamento: {page.lastmod}</small>
           </div>
         ))}
       </div>
       
-      <div class="sitemap-info">
-        <h2>Informazioni Aggiuntive</h2>
-        <ul>
-          <li><strong>Sitemap XML:</strong> <a href="/sitemap-index.xml">sitemap-index.xml</a></li>
-          <li><strong>Robots.txt:</strong> <a href="/robots.txt">robots.txt</a></li>
-          <li><strong>Sito web:</strong> <a href={SEO_CONFIG.SITE_URL}>{SEO_CONFIG.SITE_URL}</a></li>
+      <div class="border-t border-slate-200 pt-8">
+        <h2 class="text-2xl font-serif font-bold text-slate-900 mb-6">Informazioni Aggiuntive</h2>
+        <ul class="space-y-3">
+          <li class="flex flex-col sm:flex-row sm:items-center gap-2 pb-3 border-b border-slate-100 last:border-0">
+            <strong class="text-slate-700 w-32">Sitemap XML:</strong> 
+            <a href="/sitemap-index.xml" class="text-red-600 hover:text-red-700 hover:underline transition-colors">sitemap-index.xml</a>
+          </li>
+          <li class="flex flex-col sm:flex-row sm:items-center gap-2 pb-3 border-b border-slate-100 last:border-0">
+            <strong class="text-slate-700 w-32">Robots.txt:</strong> 
+            <a href="/robots.txt" class="text-red-600 hover:text-red-700 hover:underline transition-colors">robots.txt</a>
+          </li>
+          <li class="flex flex-col sm:flex-row sm:items-center gap-2 pb-3 border-b border-slate-100 last:border-0">
+            <strong class="text-slate-700 w-32">Sito web:</strong> 
+            <a href={SEO_CONFIG.SITE_URL} class="text-red-600 hover:text-red-700 hover:underline transition-colors">{SEO_CONFIG.SITE_URL}</a>
+          </li>
         </ul>
       </div>
     </div>
   </section>
 </Layout>
-
-<style>
-  .sitemap-page {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .sitemap-intro {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 2rem;
-  }
-  
-  .sitemap-grid {
-    display: grid;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-  }
-  
-  .sitemap-item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 1.5rem;
-    background: #f9f9f9;
-  }
-  
-  .sitemap-item h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.3rem;
-  }
-  
-  .sitemap-item h3 a {
-    color: #0066cc;
-    text-decoration: none;
-  }
-  
-  .sitemap-item h3 a:hover {
-    text-decoration: underline;
-  }
-  
-  .sitemap-item p {
-    margin: 0 0 0.5rem 0;
-    color: #666;
-  }
-  
-  .sitemap-item small {
-    color: #999;
-    font-size: 0.9rem;
-  }
-  
-  .sitemap-info {
-    border-top: 2px solid #ddd;
-    padding-top: 2rem;
-  }
-  
-  .sitemap-info ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sitemap-info li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .sitemap-info a {
-    color: #0066cc;
-    text-decoration: none;
-  }
-  
-  .sitemap-info a:hover {
-    text-decoration: underline;
-  }
-</style>
