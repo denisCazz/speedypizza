@@ -1,14 +1,17 @@
-// Configurazione SEO centralizzata per Speedy Pizza
+// Configurazione SEO centralizzata per Speedy Pizza Carmagnola
 export const SEO_CONFIG = {
   SITE_URL: 'https://speedy-pizza.it',
-  SITE_NAME: 'Speedy Pizza',
-  SITE_DESCRIPTION: 'Speedy Pizza - La migliore pizza a Carmagnola, direttamente a casa tua o da gustare da noi in Via Valobra. Ordina online per consegna a domicilio o ritiro.',
+  SITE_NAME: 'Speedy Pizza Carmagnola',
+  SITE_DESCRIPTION: 'Speedy Pizza Carmagnola - Pizzeria d\'asporto e consegna a domicilio in Via Valobra 117/119. Le migliori pizze artigianali di Carmagnola con ingredienti freschi e di qualità.',
+  
+  // Google Maps link per navigazione
+  MAPS_URL: 'https://maps.app.goo.gl/8r3y5hEpqaVSTpEW8',
   
   // Informazioni azienda
   BUSINESS: {
-    name: 'Speedy Pizza',
+    name: 'Speedy Pizza Carmagnola',
     address: {
-      street: 'Via Valobra',
+      street: 'Via Valobra 117/119',
       city: 'Carmagnola',
       region: 'Piemonte',
       postalCode: '10022',
@@ -35,22 +38,21 @@ export const SEO_CONFIG = {
     ]
   },
   
-  // Meta tag predefiniti
+  // Meta tag predefiniti - Focus Carmagnola
   DEFAULT_KEYWORDS: [
-    'pizza',
-    'pizzeria',
-    'Carmagnola',
-    'Via Valobra',
-    'Speedy Pizza',
-    'domicilio',
-    'asporto',
-    'consegna',
-    'ordine online',
-    'pizza italiana',
-    'pizza napoletana',
-    'pizza margherita',
-    'pizza quattro stagioni',
-    'pizza marinara'
+    'pizza Carmagnola',
+    'pizzeria Carmagnola',
+    'Speedy Pizza Carmagnola',
+    'pizza asporto Carmagnola',
+    'pizza domicilio Carmagnola',
+    'consegna pizza Carmagnola',
+    'Via Valobra Carmagnola',
+    'pizzeria Via Valobra',
+    'ordine pizza Carmagnola',
+    'pizza artigianale Carmagnola',
+    'migliore pizza Carmagnola',
+    'pizza Torino sud',
+    'pizza vicino a me Carmagnola'
   ],
   
   // Immagini SEO

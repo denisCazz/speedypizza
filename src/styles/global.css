@@ -7,25 +7,36 @@
   
   body {
     font-family: 'Inter', sans-serif;
-    @apply text-slate-800 bg-white antialiased;
+    @apply text-white bg-gray-950 antialiased;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Merriweather', serif;
+    font-family: 'Inter', sans-serif;
+    @apply tracking-tight font-bold;
+  }
+  
+  /* View Transitions */
+  @view-transition {
+    navigation: auto;
+  }
+  
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.4s;
   }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-2xl font-semibold transition-all duration-500 ease-out transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
 
   .btn-primary {
-    @apply bg-red-600 text-white hover:bg-red-700 shadow-lg shadow-red-500/30 focus:ring-red-500;
+    @apply bg-gradient-to-r from-red-600 to-red-500 text-white hover:from-red-700 hover:to-red-600 shadow-xl shadow-red-500/25 focus:ring-red-500;
   }
 
   .btn-secondary {
-    @apply bg-slate-800 text-white hover:bg-slate-700 shadow-lg shadow-slate-500/30 focus:ring-slate-500;
+    @apply bg-gradient-to-r from-slate-800 to-slate-700 text-white hover:from-slate-900 hover:to-slate-800 shadow-xl shadow-slate-500/25 focus:ring-slate-500;
   }
   
   .container {
@@ -33,6 +44,47 @@
   }
   
   .section-padding {
-    @apply py-16 md:py-24;
+    @apply py-20 md:py-32;
   }
+  
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20;
+  }
+  
+  /* Modern card hover */
+  .card-hover {
+    @apply transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-red-600 via-orange-500 to-red-600 bg-clip-text text-transparent;
+  }
+  
+  /* Smooth fade in animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  /* Stagger children animations */
+  .stagger-children > * {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+  
+  .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
 }
