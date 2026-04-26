@@ -7,12 +7,14 @@ import * as menuData from '../../menu.json';
 const nonVegetarianIngredients = [
   "prosciutto", "acciughe", "wurstel", "salamino piccante", "tonno", 
   "salsiccia", "prosciutto crudo", "frutti di mare", "speck", "bresaola", 
-  "pancetta", "gamberetti", "'nduja", "porchetta"
+  "pancetta", "gamberetti", "nduja", "porchetta"
 ];
 
-const spicyIngredients = ["salamino piccante", "peperoncino", "'nduja"];
+const spicyIngredients = ["salamino piccante", "peperoncino", "nduja"];
 
-const pizzas = menuData.pizze.map(pizza => {
+const allProdotti = menuData.categorie.flatMap(cat => cat.prodotti);
+
+const pizzas = allProdotti.map(pizza => {
   const lowerCaseIngredients = pizza.ingredienti.map(ing => ing.toLowerCase());
   return {
     name: pizza.nome,
@@ -23,7 +25,7 @@ const pizzas = menuData.pizze.map(pizza => {
   };
 });
 
-const extraInfo = menuData.extra;
+const extraNote = menuData.extra.note;
 
 // Prepara i dati per lo script client-side
 const clientSidePizzas = pizzas.map(p => ({
@@ -138,31 +140,8 @@ const phoneNumber = menuData.telefono;
 
       <div class="mt-14 bg-gray-800/50 rounded-2xl border border-gray-700/50 p-8 max-w-3xl mx-auto">
         <h3 class="text-xl font-bold text-white mb-6 text-center border-b border-gray-700/50 pb-4">Supplementi e Extra</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-400">
-          <div class="flex justify-between items-center p-3 bg-gray-900/50 hover:bg-gray-900 rounded-xl transition-colors duration-300">
-            <span>Aggiunta ingredienti</span>
-            <span class="font-bold text-white">€ {extraInfo.aggiunta_ingredienti.toFixed(2)}</span>
-          </div>
-          <div class="flex justify-between items-center p-3 bg-gray-900/50 hover:bg-gray-900 rounded-xl transition-colors duration-300">
-            <span>Aggiunta Burrata</span>
-            <span class="font-bold text-white">€ {extraInfo.aggiunta_burrata.toFixed(2)}</span>
-          </div>
-          <div class="flex justify-between items-center p-3 bg-gray-900/50 hover:bg-gray-900 rounded-xl transition-colors duration-300">
-            <span>Aggiunta Patatine</span>
-            <span class="font-bold text-white">€ {extraInfo.aggiunta_patatine.toFixed(2)}</span>
-          </div>
-          <div class="flex justify-between items-center p-3 bg-gray-900/50 hover:bg-gray-900 rounded-xl transition-colors duration-300">
-            <span>Aggiunta salumi pregiati</span>
-            <span class="font-bold text-white">€ {extraInfo.aggiunta_salumi_pregiati.toFixed(2)}</span>
-          </div>
-          <div class="flex justify-between items-center p-3 bg-gray-900/50 hover:bg-gray-900 rounded-xl transition-colors duration-300">
-            <span>Aggiunta Mozzarella di Bufala</span>
-            <span class="font-bold text-white">€ {extraInfo.aggiunta_bufala.toFixed(2)}</span>
-          </div>
-          <div class="flex justify-between items-center p-3 bg-emerald-500/10 rounded-xl text-emerald-400 border border-emerald-500/20">
-            <span class="font-semibold">Sconto Pizza Baby</span>
-            <span class="font-bold">-€ {extraInfo.pizza_baby_sconto.toFixed(2)}</span>
-          </div>
+        <div class="text-center text-gray-300 text-sm py-2">
+          <p>{extraNote}</p>
         </div>
         <div class="mt-5 pt-4 border-t border-gray-700/50 text-center text-xs text-gray-500">
           <p>Disponibile anche impasto integrale. Per allergeni chiedi al momento dell'ordine.</p>
